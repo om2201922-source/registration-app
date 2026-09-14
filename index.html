@@ -18,10 +18,6 @@
             text-align: center;
             margin-bottom: 30px;
         }
-        .header img {
-            width: 100px; /* يمكنك وضع رابط لوجو البوت الخاص بك هنا */
-            border-radius: 50%;
-        }
         .form-group {
             margin-bottom: 20px;
         }
@@ -66,49 +62,47 @@
 <body>
 
     <div class="header">
-        <h2>تعديل بياناتي ✏️</h2>
+        <h2>تسجيل البيانات ✏️</h2>
     </div>
 
     <div class="form-group">
         <label>الاسم الكامل <span>*</span></label>
-        <input type="text" id="name" placeholder="عمر محمد محمود" required>
+        <input type="text" id="name" placeholder="أدخل اسمك الثلاثي" required>
     </div>
 
     <div class="form-group">
         <label>البريد الإلكتروني <span>*</span></label>
-        <input type="email" id="email" placeholder="om229877@gmail.com" required>
+        <input type="email" id="email" placeholder="example@gmail.com" required>
     </div>
 
     <div class="form-group">
         <label>رقم الهاتف (مع رمز الدولة) <span>*</span></label>
-        <input type="tel" id="phone" placeholder="01210115226" required>
+        <input type="tel" id="phone" placeholder="+201xxxxxxxxx" required>
     </div>
 
-    <button onclick="submitData()">تحديث</button>
+    <button onclick="submitData()">تأكيد البيانات</button>
     <button class="close-btn" onclick="Telegram.WebApp.close()">إغلاق</button>
 
     <script>
         let tg = window.Telegram.WebApp;
-        tg.expand(); // لجعل النافذة تملأ الشاشة
+        tg.expand();
 
         function submitData() {
-            let name = document.getElementById("name").value;
-            let email = document.getElementById("email").value;
-            let phone = document.getElementById("phone").value;
+            let name = document.getElementById("name").value.trim();
+            let email = document.getElementById("email").value.trim();
+            let phone = document.getElementById("phone").value.trim();
 
             if(!name || !email || !phone) {
                 tg.showAlert("⚠️ الرجاء ملء جميع الحقول المطلوبة!");
                 return;
             }
 
-            // تجميع البيانات لإرسالها للبوت
             let data = {
                 name: name,
                 email: email,
                 phone: phone
             };
 
-            // إرسال البيانات للبوت وإغلاق النافذة
             tg.sendData(JSON.stringify(data));
         }
     </script>
